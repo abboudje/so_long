@@ -6,15 +6,32 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:46 by abboudje          #+#    #+#             */
-/*   Updated: 2024/11/04 16:48:39 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/11/06 02:30:13 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #ifndef SO_LONG_H
+# define SO_LONG_H
 # include<stdio.h>
+# include<stdbool.h>
+# include<stdlib.h>
+# include<unistd.h>
+# include<fcntl.h>
 # include "../minilibx-linux/mlx.h"
-
-# define SO_LON_H
+# include "../core/libft/libft.h"
+# define BUFFER_SIZE 300
+/****************************CHECK.C*************************/
+void	check_the_map(char **map, int height, int width);
+bool	check_format(int height, int width);
+bool	check_walls(char **map, int height, int width);
+bool	check_outliers(char **map, int height, int width);
+bool	check_items(char **map, int height, int width);
+/*****************************MATRIX.C**********************/
+int		get_height(char **map);
+int		get_width(char **map, int height);
+/*************************** FREE.C*****************************/
+void	free_map(char **map);
+void	exit_with_error(char **map, char *error);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/13 17:24:01 by abboudje          #+#    #+#              #
-#    Updated: 2024/11/04 16:45:32 by abboudje         ###   ########.fr        #
+#    Updated: 2024/11/06 02:07:19 by abboudje         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,10 @@ MLX_LIB     = $(MLX_PATH)$(MLX_FILE)
 MLX_FLAGS   = -lX11 -lXext  # Flags for linking the MinilibX library
 
 # Source files
-C_FILES     = main.c \
+C_FILES     = 	main.c  \
+				check.c \
+				matrix.c \
+				free.c \
 
 SRC_DIR      = ./src/
 SRC          = $(addprefix $(SRC_DIR), $(C_FILES))  # Complete paths to source files

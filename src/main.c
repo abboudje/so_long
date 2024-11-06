@@ -10,32 +10,79 @@ typedef struct	s_data
 	int		endian;
 }	t_data;
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+int check_file(char *path)
 {
-	char	*dst;
+	int		fd;
+	size_t	len;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	len = ft_strlen(path);
+
+	if (len < 4 || ft_strncmp(path + len - 4, ".ber", 4) != 0)
+	{
+		ft_putstr_fd("Error\n Invalid file extension\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+	{
+		perror("Error\n");
+		exit(EXIT_FAILURE);
+	}
+	return (fd);
 }
 
-int	main(void)
+char	**get_data(int fd)
 {
-	void	*mlx_win;
-	void	*mlx;
-	t_data	img;
+	char	**map;
+	char	buffer[BUFFER_SIZE];
+	char	*data;
+	char	*temp;
+	int		data_bytes;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 500, 500, "hello world!");
-	img.img = mlx_new_image(mlx, 50, 50);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	int i = -1;
-	while (++i < 50)
+	data = ft_strdup("");
+	data_bytes = read(fd, buffer, BUFFER_SIZE);
+	while (data_bytes > 0)
 	{
-		int j = -1;
-		while (++j < 50)
-			my_mlx_pixel_put(&img, i, j, 0x00FF0000);
+		buffer[data_bytes] = '\0';
+		temp = data;
+		data = ft_strjoin(data, buffer);
+		free(temp);
+		if (!data)
+			return (NULL);
+		data_bytes = read(fd, buffer, BUFFER_SIZE);
 	}
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 50, 50);
-	mlx_loop(mlx);
-	//mlx_loop(mlx);
+	if (data_bytes == -1)
+		return (free(data), NULL);
+	close(fd);
+	map = ft_split(data, '\n');
+	free(data);
+	return (map);
+}
+
+char	**get_map(char *path)
+{
+	int		fd;
+	char	**map;
+
+	fd = check_file(path);
+	map = get_data(fd);
+
+	return (map);
+}
+
+int	main(int argc, char **argv)
+{
+	char	**map;
+	int		height;
+	int		width;
+
+	if (argc != 2)
+		return (-1);
+	map = get_map(argv[1]);
+	height = get_height(map);
+	width = get_width(map, height);
+	check_the_map(map, height, width);
+	printf("height = %d, width = %d \n", height, width);
+	//printf("%s\n", map);
+	free_map(map);
 }
