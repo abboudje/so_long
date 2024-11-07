@@ -76,7 +76,9 @@ int	main(int argc, char **argv)
 	check_the_map(map, height, width);
 	data = malloc(sizeof(t_data));
 	init_data(data, map, height, width);
+	return (0);
 	render_map(data);
 	mlx_loop(data->mlx);
 	free_map(map);
 }
+

@@ -6,7 +6,7 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:46 by abboudje          #+#    #+#             */
-/*   Updated: 2024/11/06 16:23:17 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:20:12 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ typedef struct s_data
 	int		map_height;
 }	t_data;
 
+typedef struct s_location
+{
+	int	x;
+	int	y;
+}	t_loc;
+
 /****************************CHECK.C*************************/
 void	check_the_map(char **map, int height, int width);
 bool	check_format(int height, int width);
@@ -55,5 +61,10 @@ void	init_data(t_data *data, char **map, int height, int width);
 void	*get_image(void *mlx, char *file_path, int size);
 void	render_map(t_data *data);
 void	set_image(t_data *data, void *img, int x, int y);
+/************************FLOD_FILL.C********************************/
+bool	check_path(char **map, int height, int width);
+void	flood_fill(char **map, t_loc start, int height, int width);
+char	**copy_map(char **map, int height);
+t_loc	get_start_position(char **map, int height, int width);
 
 #endif

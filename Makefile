@@ -6,7 +6,7 @@
 #    By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/13 17:24:01 by abboudje          #+#    #+#              #
-#    Updated: 2024/11/06 12:52:15 by abboudje         ###   ########.fr        #
+#    Updated: 2024/11/07 12:59:17 by abboudje         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ C_FILES     = 	main.c  \
 				matrix.c \
 				free.c \
 				render.c \
+				flood_fill.c \
 
 SRC_DIR      = ./src/
 SRC          = $(addprefix $(SRC_DIR), $(C_FILES))  # Complete paths to source files

@@ -6,7 +6,7 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 23:26:38 by abboudje          #+#    #+#             */
-/*   Updated: 2024/11/06 02:23:35 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:06:16 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,7 @@ void	check_the_map(char **map, int height, int width)
 		exit_with_error(map, "Unknown symbol(s) in the map.\n");
 	if (!check_items(map, height, width))
 		exit_with_error(map, "Must have 1 Player, 1 Exit && at least 1 Item.\n");
+	return ;
+	if (!check_path(map, height, width))
+		exit_with_error(map, "chemine Valide.\n");
 }
