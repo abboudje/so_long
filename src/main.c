@@ -1,15 +1,6 @@
 
 #include  "so_long.h"
 
-typedef struct	s_data 
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
-
 int check_file(char *path)
 {
 	int		fd;
@@ -75,6 +66,7 @@ int	main(int argc, char **argv)
 	char	**map;
 	int		height;
 	int		width;
+	t_data	*data;
 
 	if (argc != 2)
 		return (-1);
@@ -82,7 +74,9 @@ int	main(int argc, char **argv)
 	height = get_height(map);
 	width = get_width(map, height);
 	check_the_map(map, height, width);
-	printf("height = %d, width = %d \n", height, width);
-	//printf("%s\n", map);
+	data = malloc(sizeof(t_data));
+	init_data(data, map, height, width);
+	render_map(data);
+	mlx_loop(data->mlx);
 	free_map(map);
 }
