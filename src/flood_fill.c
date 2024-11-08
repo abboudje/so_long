@@ -6,7 +6,7 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:58:19 by abboudje          #+#    #+#             */
-/*   Updated: 2024/11/07 14:34:30 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/11/08 16:21:46 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,56 @@ bool	check_path(char **map, int height, int width)
 {
 	char	**mapy;
 	t_loc	location;
+	t_size	map_size;
+	bool	valid;
 
 	mapy = copy_map(map, height);
-	location = get_start_position(map, height, width);
-	flood_fill(mapy, location, height, width);
+	location = get_player_loc(map, height, width);
+	map_size.height = height;
+	map_size.width = width;
+	flood_fill(mapy, location.x, location.y, map_size);
+	valid = is_valid(mapy, height, width);
+	free_map(mapy);
+	return (valid);
 }
 
-void	flood_fill(char **map, t_loc p, int height, int width)
+bool	is_valid(char **map, int height, int width)
 {
-	if (p.x < 0 || p.y < 0 || p.x >= width || p.y >= height)
-		return ;
-	if (map[p.y][p.x] == '1' || map[p.y][p.x] == 'V')
-		return ;
-    map[p.y][p.x] = 'V';
-    flood_fill(map, p.x + 1, p.y); // Right
-    flood_fill(map, p.x - 1, p.y); // Left
-    flood_fill(map, p.x, p.y + 1); // Down
-    flood_fill(map, p.x, p.y - 1); // Up
+	int		i;
+	int		j;
+	char	value;
+
+	i = 0;
+	while (i < height)
+	{
+		j = 0;
+		while (j < width)
+		{
+			value = map[i][j];
+			if (value == 'P' || value == 'E' || value == 'C')
+				return (false);
+			j++;
+		}
+		i++;
+	}
+	return (true);
 }
 
-t_loc	get_start_position(char **map, int height, int width)
+
+void	flood_fill(char **map, int x, int y, t_size map_size)
+{
+	if (x < 0 || y < 0 || x >= map_size.width || y >= map_size.height)
+		return ;
+	if (map[y][x] == '1' || map[y][x] == 'V')
+		return ;
+	map[y][x] = 'V';
+	flood_fill(map, x + 1, y, map_size);
+	flood_fill(map, x - 1, y, map_size);
+	flood_fill(map, x, y + 1, map_size);
+	flood_fill(map, x, y - 1, map_size);
+}
+
+t_loc	get_player_loc(char **map, int height, int width)
 {
 	t_loc	location;
 
@@ -59,19 +89,21 @@ char	**copy_map(char **map, int height)
 	char	**copy;
 	int		i;
 
-	copy = malloc(sizeof(char *) * height);
+	copy = malloc(sizeof(char *) * (height + 1));
 	if (!copy)
-		exit_with_error(map, "Probleme in Malloc");
+		exit_with_error(map, "Memory allocation failed");
 	i = 0;
 	while (i < height)
 	{
 		copy[i] = ft_strdup(map[i]);
 		if (!copy[i])
 		{
-			exit_with_error(map, "Probleme in Malloc");
+			free_map(copy);
+			exit_with_error(map, "Memory allocation failed");
 			return (NULL);
 		}
 		i++;
 	}
+	copy[height] = NULL;
 	return (copy);
 }

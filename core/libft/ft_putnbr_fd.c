@@ -6,7 +6,7 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 16:51:27 by abboudje          #+#    #+#             */
-/*   Updated: 2024/05/30 13:11:31 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/11/08 18:47:04 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	print_nbr(long nbr, int fd)
 {
 	char	mod;
 
+	if (nbr < 0)
+		return ;
 	mod = (nbr % 10) + '0';
 	nbr /= 10;
 	if (nbr != 0)
@@ -27,6 +29,8 @@ void	ft_putnbr_fd(int n, int fd)
 {
 	long	nbr;
 
+	if (fd < 0)
+		return ;
 	nbr = n;
 	if (nbr == 0)
 	{

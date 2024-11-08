@@ -6,7 +6,7 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:53:42 by abboudje          #+#    #+#             */
-/*   Updated: 2024/05/27 16:10:42 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:17:10 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_strcpy(char *copy, const char *src)
 {
 	int	i;
 
+	if (!src)
+		return ;
 	i = 0;
 	while (src[i])
 	{
@@ -30,6 +32,8 @@ char	*ft_strdup(const char *s)
 	int		size;
 	char	*copy;
 
+	if (s == NULL)
+		return (NULL);
 	size = ft_strlen(s);
 	copy = malloc((size + 1) * sizeof(char));
 	if (copy == NULL)
