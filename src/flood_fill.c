@@ -6,7 +6,7 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:58:19 by abboudje          #+#    #+#             */
-/*   Updated: 2024/11/08 16:21:46 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/11/14 14:05:25 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,17 @@ bool	is_valid(char **map, int height, int width)
 	return (true);
 }
 
-
 void	flood_fill(char **map, int x, int y, t_size map_size)
 {
 	if (x < 0 || y < 0 || x >= map_size.width || y >= map_size.height)
 		return ;
 	if (map[y][x] == '1' || map[y][x] == 'V')
 		return ;
+	if (map[y][x] == 'E' && !no_items(map, map_size.height, map_size.width))
+	{
+		map[y][x] = '1';
+		return ;
+	}
 	map[y][x] = 'V';
 	flood_fill(map, x + 1, y, map_size);
 	flood_fill(map, x - 1, y, map_size);

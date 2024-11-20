@@ -6,7 +6,7 @@
 #    By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/13 17:24:01 by abboudje          #+#    #+#              #
-#    Updated: 2024/11/08 17:57:56 by abboudje         ###   ########.fr        #
+#    Updated: 2024/11/10 04:25:36 by abboudje         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,10 +39,12 @@ C_FILES     = 	main.c  \
 
 SRC_DIR      = ./src/
 SRC          = $(addprefix $(SRC_DIR), $(C_FILES))  # Complete paths to source files
-OBJ          = $(SRC:.c=.o)  # Object files corresponding to source files
+OBJ_DIR		 = ./obj/
+OBJ          = $(addprefix $(OBJ_DIR), $(C_FILES:.c=.o))  # Object files corresponding to source files
 
 # Rule for compiling .c files into .o files
-.c.o:
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@mkdir -p $(OBJ_DIR)
 	$(CC) $(FLAGS) -c $< -o $@
 
 # Default target to build the executable
@@ -64,7 +66,7 @@ $(NAME): lib mlx $(OBJ)
 clean:
 	@make clean -C $(MLX_PATH)  # Clean MinilibX object files
 	@make clean -C $(LIBFT_PATH)  # Clean libft object files
-	@rm -f $(OBJ)  # Remove object files for the current project
+	@rm -rf $(OBJ_DIR)  # Remove object files for the current project
 
 # Target to clean up everything
 fclean: clean

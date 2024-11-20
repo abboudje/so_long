@@ -6,7 +6,7 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:14:53 by abboudje          #+#    #+#             */
-/*   Updated: 2024/11/08 18:22:00 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/11/14 14:15:03 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	move(t_data *data, int y_change, int x_change)
 		if (no_items(data->map, data->map_height, data->map_width))
 		{
 			print_moves(data);
-			win_game(data);
+			game_over(data);
 		}
 	}
 	if (value == '0' || value == 'C')
@@ -48,9 +48,10 @@ void	print_moves(t_data *data)
 	ft_putstr_fd(" moves \n", 1);
 }
 
-void	win_game(t_data *data)
+void	game_over(t_data *data)
 {
-	ft_putstr_fd("You win neo welcome to the real world!", 2);
+	ft_putstr_fd("Congratulations, you've escaped the Matrix.\n", 1);
+	ft_putstr_fd("Welcome to the real world!\n", 1);
 	free_data(data);
 }
 
@@ -73,4 +74,3 @@ bool	no_items(char **map, int height, int width)
 	}
 	return (true);
 }
-

@@ -6,10 +6,9 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:46 by abboudje          #+#    #+#             */
-/*   Updated: 2024/11/08 18:36:26 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/11/10 15:10:38 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
@@ -82,6 +81,6 @@ int		key_press(int keysym, t_data *data);
 /***************************MOVES.C************************** */
 void	move(t_data *data, int y_change, int x_change);
 bool	no_items(char **map, int height, int width);
-void	win_game(t_data *data);
+void	game_over(t_data *data);
 void	print_moves(t_data *data);
 #endif

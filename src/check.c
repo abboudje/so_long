@@ -6,7 +6,7 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 23:26:38 by abboudje          #+#    #+#             */
-/*   Updated: 2024/11/08 17:03:33 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/11/10 15:11:03 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ bool	check_walls(char **map, int height, int width)
 			return (false);
 		i++;
 	}
-
 	i = 0;
 	while (i < height)
 	{

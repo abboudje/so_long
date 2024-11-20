@@ -6,7 +6,7 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 02:05:04 by abboudje          #+#    #+#             */
-/*   Updated: 2024/11/08 18:36:03 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/11/14 14:34:59 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	free_data(t_data *data)
 void	exit_with_error(char **map, char *error_message)
 {
 	free_map(map);
-	ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(error_message, 2);
+	ft_putstr_fd("Error\n", 1);
+	ft_putstr_fd(error_message, 1);
 	exit(EXIT_FAILURE);
 }
